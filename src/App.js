@@ -1,25 +1,28 @@
 import logo from './logo.svg';
 import './App.css';
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const range = max => [...Array(max).keys()];
+
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            arena: range(10).map(() => range(10))
+        }
+        console.log(this.state.map)
+    }
+
+    render() {
+        return (
+            <div className="App">
+                <div>
+                    {this.state.arena.flatMap(row =>
+                        <div>{(row.map(cell => <div className="Cell"/>))}</div>)}
+                </div>
+            </div>
+        );
+    }
 }
 
 export default App;
